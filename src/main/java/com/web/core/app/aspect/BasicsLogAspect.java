@@ -32,8 +32,8 @@ public class BasicsLogAspect {
 
     /**
      * 定义切点
-     * @deprecated 配置切点，注意.*代表匹配任意
-     * @deprecated 执行处罚         返回类型  类                方法(参数)
+     * @description 配置切点，注意.*代表匹配任意
+     * @description 执行处罚         返回类型  类                方法(参数)
      * */
     @Pointcut("execution(public * com.web.core.app.controller.*.*(..))")
     public void webRequestLog(){
