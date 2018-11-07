@@ -1,0 +1,37 @@
+buildscript {
+	ext {
+		springBootVersion = '2.1.0.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.web.core'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+	maven {url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+	mavenCentral()
+	jcenter()
+}
+
+
+dependencies {
+	implementation('org.springframework.boot:spring-boot-starter')
+	testImplementation('org.springframework.boot:spring-boot-starter-test')
+	compile('com.alibaba:fastjson:1.2.47')
+	compile("org.springframework.boot:spring-boot-starter-web:2.0.6.RELEASE")
+	compile("org.springframework.boot:spring-boot-starter-aop:2.0.6.RELEASE")
+	compile group: 'org.aspectj', name: 'aspectjweaver', version: '1.9.2'
+	compile group: 'org.aspectj', name: 'aspectjrt', version: '1.9.2'
+}

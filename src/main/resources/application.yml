@@ -1,0 +1,12 @@
+
+#开发环境配置
+server:
+  port: 9966
+  servlet:
+    context-path: /api
+spring:
+  aop:
+    auto: true
+    proxy-target-class: false
+
+
