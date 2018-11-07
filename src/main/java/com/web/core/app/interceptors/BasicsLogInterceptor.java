@@ -1,5 +1,6 @@
 package com.web.core.app.interceptors;
 
+import com.alibaba.fastjson.JSON;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -10,7 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.text.SimpleDateFormat;
 import java.util.*;
-
+/**
+ * spring拦截器实现项目接口统一日志记录
+ * @author winter
+ *
+ * */
 @Component
 public class BasicsLogInterceptor extends HandlerInterceptorAdapter {
 
@@ -41,6 +46,7 @@ public class BasicsLogInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+        logger.info("[RESPONSE] " + JSON.toJSONString(response));
         logger.info( "[运行时间] " + ((new Date()).getTime() - start_time) + "ms");
     }
 

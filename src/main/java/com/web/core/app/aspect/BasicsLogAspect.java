@@ -18,20 +18,33 @@ import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
-
+/**
+ * aop切面实现项目接口统一日志记录
+ * @author winter
+ *
+ * */
 @Aspect
 @Component
 public class BasicsLogAspect {
 
     private Long start_time;
     private static Logger logger = LoggerFactory.getLogger(BasicsLogAspect.class);
-    //                                  配置切点，注意.*代表匹配任意
-    //         执行处罚         返回类型  类                     方法(参数)
+
+    /**
+     * 定义切点
+     * @deprecated 配置切点，注意.*代表匹配任意
+     * @deprecated 执行处罚         返回类型  类                方法(参数)
+     * */
     @Pointcut("execution(public * com.web.core.app.controller.*.*(..))")
     public void webRequestLog(){
 
     }
 
+    /**
+     *  目标方法之前执行
+     * @author winter
+     *
+     * */
     @Before("webRequestLog()")
     public void doBefore(JoinPoint joinPoint){
         try{
@@ -58,10 +71,16 @@ public class BasicsLogAspect {
         }
 
     }
-
+    /**
+     * 目标方法返回后调用
+     *
+     * @author winter
+     *
+     * */
     @AfterReturning(returning = "result", pointcut = "webRequestLog()")
     public void doAfterReturning(Object result){
         try{
+            logger.info("[RESPONSE] " + JSON.toJSONString(result));
             logger.info( "[运行时间] " + ((new Date()).getTime() - start_time) + "ms");
         }catch (Exception exception){
             logger.info("***记录日志失败doAfterReturning***");
